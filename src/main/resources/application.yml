@@ -18,10 +18,10 @@ spring:
         jdbc.time_zone: UTC
     database-platform: org.hibernate.dialect.Oracle12cDialect
   mail:
-    host: smtp.****.com
-    port: 999
-    username: MyemailUser@*****.com
-    password: MySmtpUserPassword
+    host: ${SMTP_HOST:root}
+    port: ${SMTP_PORT:root}
+    username: ${SMTP_USER:root}
+    password: ${SMTP_PWD:root}
     properties:
       "[mail.smtp.auth]": true
       "[mail.smtp.starttls.enable]": true
@@ -32,9 +32,9 @@ spring:
 spring:
   profiles: dsv # profile for test enviroment locally in Windows
   datasource:
-    url: jdbc:oracle:thin:@DB*****_high?TNS_ADMIN=C:/pathtoWalllet/Wallet_***** # path wallet for autonomous database configuration
-    username: myOraUserName
-    password: myOraPassword
+    url: jdbc:oracle:thin:@${ORA_DBNAME:root}_high?TNS_ADMIN=C:/projects/Wallet_${ORA_DBNAME:root} # path wallet for autonomous database wallet
+    username: ${ORA_USER:root}
+    password: ${ORA_PWD:root}
 ---
 spring:
   profiles: homolog # profile for homologation enviroment phase in Linux
