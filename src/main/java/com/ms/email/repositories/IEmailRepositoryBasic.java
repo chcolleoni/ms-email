@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface IEmailRepositoryBasic extends JpaRepository<Email, Long> {
+public interface IEmailRepositoryBasic extends JpaRepository<Email, UUID> {
 
     default Optional<?> save(EntityManager em, Email email) {
 
