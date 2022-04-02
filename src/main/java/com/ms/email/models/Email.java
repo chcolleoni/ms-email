@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.UUID;
 
 
 @Data
@@ -15,7 +16,7 @@ public class Email implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "EMAIL_ID")
-    private Long emailId;
+    private UUID emailId;
 
     private String emailFrom;
 

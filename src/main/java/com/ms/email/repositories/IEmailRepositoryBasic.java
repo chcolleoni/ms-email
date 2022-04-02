@@ -9,6 +9,7 @@ import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
 import java.time.Instant;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface IEmailRepositoryBasic extends JpaRepository<Email, Long> {
@@ -22,7 +23,7 @@ public interface IEmailRepositoryBasic extends JpaRepository<Email, Long> {
                 .registerStoredProcedureParameter("P_STATUS_EMAIL", String.class, ParameterMode.IN)
                 .registerStoredProcedureParameter("P_TEXT_EMAIL", String.class, ParameterMode.IN)
                 .registerStoredProcedureParameter("P_DATE_SEND", Instant.class, ParameterMode.IN)
-                .registerStoredProcedureParameter("P_RES", Long.class, ParameterMode.OUT)
+                .registerStoredProcedureParameter("P_RES", UUID.class, ParameterMode.OUT)
                 .setParameter("P_EMAIL_FROM", email.getEmailFrom())
                 .setParameter("P_EMAIL_TO", email.getEmailTo())
                 .setParameter("P_SUBJECT", email.getSubject())
@@ -32,7 +33,7 @@ public interface IEmailRepositoryBasic extends JpaRepository<Email, Long> {
                 );
 
         oraProcedure.execute();
-        Long vRes = (Long) oraProcedure.getOutputParameterValue("P_RES");
+        UUID vRes = (UUID) oraProcedure.getOutputParameterValue("P_RES");
         email.setEmailId(vRes);
 
         return Optional.ofNullable(vRes);
