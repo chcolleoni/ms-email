@@ -8,6 +8,10 @@ spring:
   profiles.active: dsv
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
+  rabbitmq:
+    addresses: amqps://ntebmayb:${RABBITMQ_ADDR}@gull.rmq.cloudamqp.com/ntebmayb
+    queue: ms.email
+
   jpa:
     show-sql: true
     hibernate:
